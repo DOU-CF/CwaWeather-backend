@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
  * CWA 氣象資料開放平臺 API
  * 使用「一般天氣預報-今明 36 小時天氣預報」資料集
  */
-const getTaoyuanWeather = async (req, res) => {
+const getTaichungWeather = async (req, res) => {
   try {
     // 檢查是否有設定 API Key
     if (!CWA_API_KEY) {
@@ -131,7 +131,7 @@ app.get("/", (req, res) => {
   res.json({
     message: "歡迎使用 CWA 天氣預報 API",
     endpoints: {
-      Taoyuan: "/api/weather/Taoyuan",
+      Taichung: "/api/weather/Taichung",
       health: "/api/health",
     },
   });
@@ -142,7 +142,7 @@ app.get("/api/health", (req, res) => {
 });
 
 // 取得桃園天氣預報
-app.get("/api/weather/Taoyuan", getTaoyuanWeather);
+app.get("/api/weather/Taichung", getTaichungWeather);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
