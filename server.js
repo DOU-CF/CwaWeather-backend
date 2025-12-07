@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /**
- * 取得桃園天氣預報
+ * 取得高雄天氣預報
  * CWA 氣象資料開放平臺 API
  * 使用「一般天氣預報-今明 36 小時天氣預報」資料集
  */
@@ -37,18 +37,18 @@ const getKaohsiungWeather = async (req, res) => {
       {
         params: {
           Authorization: CWA_API_KEY,
-          locationName: "桃園市",
+          locationName: "高雄市",
         },
       }
     );
 
-    // 取得桃園市的天氣資料
+    // 取得高雄市的天氣資料
     const locationData = response.data.records.location[0];
 
     if (!locationData) {
       return res.status(404).json({
         error: "查無資料",
-        message: "無法取得桃園市天氣資料",
+        message: "無法取得高雄市天氣資料",
       });
     }
 
@@ -141,7 +141,7 @@ app.get("/api/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
-// 取得桃園天氣預報
+// 取得高雄天氣預報
 app.get("/api/weather/Kaohsiung", getKaohsiungWeather);
 
 // Error handling middleware
